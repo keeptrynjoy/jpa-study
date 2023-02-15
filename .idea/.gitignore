@@ -7,3 +7,8 @@
 /dataSources/
 /dataSources.local.xml
 
+/jpa-buddy.xml
+/JPA_study.iml
+/misc.xml
+/modules.xml
+/vcs.xml
