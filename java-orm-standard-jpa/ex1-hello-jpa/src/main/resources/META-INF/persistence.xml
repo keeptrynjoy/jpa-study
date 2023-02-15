@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             version="2.1">
+    <persistence-unit name="hello">
+        <properties>
+            <!-- 필수 속성 -->
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test;MODE=LEGACY"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+
+            <!-- 옵션 -->
+            <property name="hibernate.show_sql" value="true"/> <!-- query 주석으로 출력하는 옵션-->
+            <property name="hibernate.format_sql" value="true"/> <!-- 출력한 query를 이쁘게 출력하게 만들어주는 옵션  -->
+            <property name="hibernate.use_sql_comments" value="true"/> <!-- query가 왜 나왔는지를 주석으로 설명해주는 옵션 -->
+            <property name="hibernate.jdbc.batch_size" value="10"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>
