@@ -1,12 +1,12 @@
 package javabook.javashop;
 
 import javabook.javashop.domain.Order;
+import javabook.javashop.domain.OrderItem;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
 
 public class JpaMain {
 
@@ -19,7 +19,8 @@ public class JpaMain {
             tx.begin();
 
             try {
-
+                Order order = new Order();
+                order.addOrderItem(new OrderItem());
 
                 tx.commit();
             } catch (Exception e) {

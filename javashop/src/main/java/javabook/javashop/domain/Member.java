@@ -1,6 +1,8 @@
 package javabook.javashop.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -13,6 +15,9 @@ public class Member {
     private String street;
     private String zipcode;
 
+    // 비즈니스에서는 나쁜 코드 - order 가 필요할 경우 order 에서 접근하는게 좋음
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
     public Long getId() {
         return id;
     }
