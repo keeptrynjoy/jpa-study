@@ -21,8 +21,16 @@ public class JpaMain {
 
             try {
                 Book book = new Book();
-                book.setName("JPA");
                 book.setAuthor("김영한");
+                book.setName("JPA");
+
+                OrderItem orderItem1 = new OrderItem();
+                orderItem1.setItem(book);
+
+                Order order = new Order();
+                order.addOrderItem(orderItem1);
+
+                em.persist(order);
 
                 em.persist(book);
 
