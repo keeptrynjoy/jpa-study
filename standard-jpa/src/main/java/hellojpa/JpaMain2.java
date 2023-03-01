@@ -1,10 +1,6 @@
 package hellojpa;
 
-
-import org.hibernate.Hibernate;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 public class JpaMain2 {
     public static void main(String[] args) {
@@ -17,24 +13,20 @@ public class JpaMain2 {
         tx.begin();
 
         try{
-            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
+            Child child1 = new Child();
+            Child child2 = new Child();
 
-            Member member1 = new Member();
-            member1.setUserName("member1");
-            member1.setTeam(team);
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
 
-            em.persist(member1);
+            em.persist(parent);
 
             em.flush();
             em.clear();
 
-            Member m = em.find(Member.class, member1.getId());
-
-            System.out.println("m.getTeam().getClass() = " + m.getTeam().getClass());
-
-            m.getTeam().getName();
+            Parent findParent = em.find(Parent.class, parent.getId());
+            findParent.getChildList().remove(0);
 
             tx.commit();
 
