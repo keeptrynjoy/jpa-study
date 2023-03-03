@@ -1,10 +1,13 @@
 package hellojpa;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-@Entity//JPA가 roding 될때 관리해야할 객체로 인식되게하는 애너테이션
-public class Member extends BaseEntity{
+@Entity
+public class Member {//extends BaseEntity{
 
     @Id @GeneratedValue
     @Column(name = "MEMBER_ID")
@@ -13,19 +16,74 @@ public class Member extends BaseEntity{
     @Column(name = "USERNAME")
     private String userName;
 
+    @Embedded
+    private Address homeAddress;
+
+    @ElementCollection
+    @CollectionTable(name = "FAVORITE_FOOD",joinColumns = @JoinColumn(name = "MEMBER_ID"))
+    @Column(name = "FOOD_NAME")
+    private Set<String> favoriteFoods = new HashSet<>();
+
+//    @ElementCollection
+//    @CollectionTable(name = "ADDRESS",joinColumns = @JoinColumn(name = "MEMBER_ID"))
+//    private List<Address> addressHistory = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "MEMBER_ID")
+    private List<AddressEntity> addressHistory = new ArrayList<>();
+
+    public Set<String> getFavoriteFoods() {
+        return favoriteFoods;
+    }
+
+    public void setFavoriteFoods(Set<String> favoriteFoods) {
+        this.favoriteFoods = favoriteFoods;
+    }
+//
+//    public List<Address> getAddressHistory() {
+//        return addressHistory;
+//    }
+
+    public List<AddressEntity> getAddressHistory() {
+        return addressHistory;
+    }
+
+    public void setAddressHistory(List<AddressEntity> addressHistory) {
+        this.addressHistory = addressHistory;
+    }
+
+
+//    public void setAddressHistory(List<Address> addressHistory) {
+//        this.addressHistory = addressHistory;
+//    }
+
+//    @Embedded
+//    private Address homeAddress;
+
+//    @Embedded
+//    @AttributeOverrides({
+//                @AttributeOverride(name = "city",
+//                        column = @Column(name = "WORK_CITY")),
+//                @AttributeOverride(name = "street",
+//                        column = @Column(name = "WORK_STREET")),
+//                @AttributeOverride(name = "zipcode",
+//                        column = @Column(name = "WORK_ZIPCODE"))
+//        })
+//    private Address workAddress;
+
 //    @Column(name = "TEAM_ID")
 //    private Long teamId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "Team_ID")
-    private Team team;
-//
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "Team_ID")
+//    private Team team;
+////
 //    @OneToOne
 //    @JoinColumn(name="LOCKER_ID")
 //    private Locker locker;
 
-    public Member() {
-    }
+//    public Member() {
+//    }
 
     public Long getId() {
         return id;
@@ -43,19 +101,34 @@ public class Member extends BaseEntity{
         this.userName = userName;
     }
 
-    public Team getTeam() {
-        return team;
+//    public Period getWorkPeriod() {
+//        return workPeriod;
+//    }
+
+//    public void setWorkPeriod(Period workPeriod) {
+//        this.workPeriod = workPeriod;
+//    }
+
+    public Address getHomeAddress() {
+        return homeAddress;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
     }
-
+//    public Team getTeam() {
+//        return team;
+//    }
+//
+//    public void setTeam(Team team) {
+//        this.team = team;
+//    }
+//
 //    public void changeTeam(Team team) {
 //        this.team = team;
 //        team.getMembers().add(this);
 //    }
-
+//
 //    public Long getTeamId() {
 //        return teamId;
 //    }
