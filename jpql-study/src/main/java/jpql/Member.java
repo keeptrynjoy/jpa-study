@@ -16,6 +16,15 @@ public class Member {
     public Member() {
     }
 
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }
