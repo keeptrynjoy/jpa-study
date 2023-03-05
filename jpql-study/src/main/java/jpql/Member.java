@@ -5,6 +5,10 @@ import javax.persistence.*;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
+@NamedQuery(
+        name = "Member.findByUserName",
+        query = "SELECT m FROM Member m WHERE m.userName = : userName"
+)
 public class Member {
     @Id @GeneratedValue
     private Long id;
